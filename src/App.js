@@ -2,6 +2,8 @@ import "./App.css";
 import {useEffect, useState} from "react"
 import axios from "axios";
 import Category from "./components/category";
+import Navbar from "./components/navbar";
+import Header from "./components/header";
 
 function App() {
   const [data, setData] = useState({});
@@ -21,20 +23,25 @@ function App() {
   }, [])
   return (
     isLoading? <span>Loading content in progress</span>:
-    <div className="container">
-      <div className="menu">
-        <div className="categories">
-          {data.categories.map((category, index) => {
-                return (
-                  <Category key={index} category={category}/>
-                )
-              })}
+    <>
+      <Navbar/>
+      <Header restaurant={data.restaurant}/>
+        <div className="menu container">
+          <div className="categories">
+            {data.categories.map((category, index) => {
+                  return (
+                    <Category key={index} category={category}/>
+                  )
+                })}
+          </div>
+          <aside className="fixed-side">
+            <div className="basket">
+                <button className="basket-validation" disabled>Valider votre panier</button>
+                <p className="basket-content">Votre panier est vide</p>
+            </div>
+          </aside>
         </div>
-        <div className="basket">
-
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

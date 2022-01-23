@@ -3,9 +3,11 @@ const Meal = ({meal}) => {
         <section className="meal-component" >
             <div>
                 <h3>{meal.title}</h3>
-                <p>{meal.description}</p>
-                <p>{meal.price}</p>
-                {meal.popular && <span>Popular</span>}
+                <p className="meal-description">{meal.description}</p>
+                <div className="priceAndPopularity">
+                    <p className="meal-price">{meal.price}€</p>
+                    {meal.popular && <span>★ Popular</span>}
+                </div>
             </div>
             {meal.picture && <img src={meal.picture} alt="#"/>}
       </section>
