@@ -4,9 +4,15 @@ import axios from "axios";
 import Category from "./components/category";
 import Navbar from "./components/navbar";
 import Header from "./components/header";
+import Basket from "./components/basket";
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faMinusCircle, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+library.add(faMinusCircle, faPlusCircle);
 
 function App() {
   const [data, setData] = useState({});
+  const [menuSelected, setMenuSelected] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
@@ -20,25 +26,22 @@ function App() {
       }
     }
     fetchData();
-  }, [])
+  }, []);
   return (
     isLoading? <span>Loading content in progress</span>:
     <>
       <Navbar/>
       <Header restaurant={data.restaurant}/>
         <div className="menu container">
-          <div className="categories">
+          <div className="category-container">
             {data.categories.map((category, index) => {
                   return (
-                    <Category key={index} category={category}/>
+                    <Category key={index} category={category} menuSelected={menuSelected} setMenuSelected={setMenuSelected}/>
                   )
                 })}
           </div>
-          <aside className="fixed-side">
-            <div className="basket">
-                <button className="basket-validation" disabled>Valider votre panier</button>
-                <p className="basket-content">Votre panier est vide</p>
-            </div>
+          <aside className="basket-container">
+                <Basket menuSelected={menuSelected} setMenuSelected={setMenuSelected}/>
           </aside>
         </div>
     </>
