@@ -1,6 +1,9 @@
 import MealInBasket from "./mealInTheBasket";
 
 const Basket = ({menuSelected, setMenuSelected}) => {
+    const calcTotal = () => {
+        return Math.round(menuSelected.reduce((acc, meal) => {return acc + meal.price*meal.number}, 0)*100)/100
+    };
     return (
         <div className="basket">
             <button className="basket-validation" disabled={menuSelected.length > 0? false: true} >Valider votre panier</button>
@@ -15,7 +18,7 @@ const Basket = ({menuSelected, setMenuSelected}) => {
                     <div className="basketSummaryBlock">
                         <span className="basketSummary">
                             <span>Sous-total</span>
-                            <span>{Math.round(menuSelected.reduce((acc, meal) => {return acc + meal.price*meal.number}, 0)*100)/100}</span>
+                            <span>{calcTotal()}</span>
                         </span>
                         <span className="basketSummary">
                             <span>Frais de livraison</span>
@@ -24,7 +27,7 @@ const Basket = ({menuSelected, setMenuSelected}) => {
                     </div>
                     <span className="total basketSummary">
                             <span>TOTAL</span>
-                            <span>{Math.round(menuSelected.reduce((acc, meal) => {return acc + meal.price*meal.number}, 0)*100)/100 + 2.5}€</span>
+                            <span>{calcTotal() + 2.5}€</span>
                     </span>
                 </>}
         </div>

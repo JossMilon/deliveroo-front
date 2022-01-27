@@ -27,9 +27,9 @@ const MealInBasket = ({meal, menuSelected, setMenuSelected}) => {
     return (
         <div className="mealInTheBasket">
             <span className="updateMealNumber">
-              <FontAwesomeIcon icon="minus-circle" onClick={() => handleMinusClick(meal)}/>
+              <FontAwesomeIcon className="icon" icon="minus-circle" onClick={() => handleMinusClick(meal)}/>
               <span>{meal.number}</span>
-              <FontAwesomeIcon icon="plus-circle" onClick={() => handlePlusClick(meal)}/>
+              <FontAwesomeIcon className="icon" icon="plus-circle" onClick={() => handlePlusClick(meal)}/>
               <span className="mealTitle">{meal.title}</span>
             </span>
             <span className="mealPrice">{Math.round(meal.number*meal.price*100)/100}€</span>
